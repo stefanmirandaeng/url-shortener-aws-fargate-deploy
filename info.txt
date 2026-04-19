@@ -1,0 +1,29 @@
+ecr_repository_url = "447170313597.dkr.ecr.ap-southeast-2.amazonaws.com/url-shortener"
+
+
+# Authenticate Docker to your ECR registry
+aws ecr get-login-password --region ap-southeast-2 \
+  | docker login \
+  --username AWS \
+  --password-stdin 447170313597.dkr.ecr.ap-southeast-2.amazonaws.com
+
+# Tag your local image with the ECR URL
+docker tag url-shortener:local \
+  447170313597.dkr.ecr.ap-southeast-2.amazonaws.com/url-shortener:latest
+
+# Push it
+docker push \
+  447170313597.dkr.ecr.ap-southeast-2.amazonaws.com/url-shortener:latest
+
+# Verify it landed
+aws ecr list-images \
+  --repository-name url-shortener \
+  --region ap-southeast-2
+
+
+
+{
+    "UserId": "AIDAWQHLNPV674O6LBNQW",
+    "Account": "447170313597",
+    "Arn": "arn:aws:iam::447170313597:user/admin"
+}
