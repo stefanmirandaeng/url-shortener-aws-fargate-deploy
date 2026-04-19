@@ -1,36 +1,29 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:447170313597:task-definition/url-shortener:1",
+    "family": "url-shortener",
+    "taskRoleArn": "arn:aws:iam::447170313597:role/url-shortener-20260419113152949500000002",
+    "executionRoleArn": "arn:aws:iam::447170313597:role/url-shortener-20260419113152950400000004",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256",
+    "memory": "512",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
     "containerDefinitions": [
         {
             "name": "url-shortener",
             "image": "447170313597.dkr.ecr.ap-southeast-2.amazonaws.com/url-shortener:latest",
             "cpu": 256,
             "memory": 512,
+            "essential": true,
             "portMappings": [
                 {
                     "containerPort": 5000,
                     "hostPort": 5000,
-                    "protocol": "tcp",
-                    "name": "url-shortener"
+                    "protocol": "tcp"
                 }
             ],
-            "essential": true,
-            "restartPolicy": {
-                "enabled": true
-            },
-            "environment": [],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "linuxParameters": {
-                "initProcessEnabled": false
-            },
-            "startTimeout": 30,
-            "stopTimeout": 120,
-            "versionConsistency": "disabled",
-            "privileged": false,
-            "readonlyRootFilesystem": true,
-            "interactive": false,
-            "pseudoTerminal": false,
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -39,66 +32,9 @@
                     "awslogs-stream-prefix": "ecs"
                 }
             },
-            "systemControls": []
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": []
         }
-    ],
-    "family": "url-shortener",
-    "taskRoleArn": "arn:aws:iam::447170313597:role/url-shortener-20260419113152949500000002",
-    "executionRoleArn": "arn:aws:iam::447170313597:role/url-shortener-20260419113152950400000004",
-    "networkMode": "awsvpc",
-    "revision": 1,
-    "volumes": [],
-    "status": "ACTIVE",
-    "requiresAttributes": [
-        {
-            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-        },
-        {
-            "name": "ecs.capability.execution-role-awslogs"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.ecr-auth"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-        },
-        {
-            "name": "ecs.capability.container-restart-policy"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.task-iam-role"
-        },
-        {
-            "name": "ecs.capability.container-ordering"
-        },
-        {
-            "name": "ecs.capability.execution-role-ecr-pull"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-        },
-        {
-            "name": "ecs.capability.task-eni"
-        }
-    ],
-    "placementConstraints": [],
-    "compatibilities": [
-        "EC2",
-        "MANAGED_INSTANCES",
-        "FARGATE"
-    ],
-    "runtimePlatform": {
-        "cpuArchitecture": "X86_64",
-        "operatingSystemFamily": "LINUX"
-    },
-    "requiresCompatibilities": [
-        "FARGATE"
-    ],
-    "cpu": "256",
-    "memory": "512",
-    "registeredAt": "2026-04-19T21:31:55.282000+10:00",
-    "registeredBy": "arn:aws:iam::447170313597:user/admin"
+    ]
 }
